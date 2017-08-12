@@ -1,25 +1,14 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Polyglot persistence"
 date:   2017-08-12 19:44:44 -0300
-categories: jekyll update
+categories: persistence databases
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+What is the best kind of database available? It's MongoDB with the schemaless and high flexibility? It's a relational database with his keys, integrity and many years of evolution? Well it can be a Redis and the speed of a key-value storage! I can spend days talking about the databases available, but we will never find the best one.
 
-Jekyll also offers powerful support for code snippets:
+But, what if I told you that we dont need to use only one database? We can use as much as we need! If you want to use a cache in your application, use a key-value database! Need to develop a fucntion where the data model is constantly changing? Use a schemaless database (like MongoDB or CouchDB)! You need to save series of data (IoT sensor data over the time)? Why not to use a database like Cassandra?
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+It's a crime to use a single one database to solve all the problems, different kinds of problems need diferents aproachs.
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+Maybe I talk about those databases in next posts.
