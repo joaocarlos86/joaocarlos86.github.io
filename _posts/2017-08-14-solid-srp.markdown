@@ -13,11 +13,11 @@ So, at the start, what's SOLID? SOLID represents five basic principles about Obj
 
 The five principles stablished in SOLID are:
 
-Single Responsibility Principle (I will write more about it in this arcticle)
-Open Closed Principle
-Liskov Substitution Principle
-Interface Segregation Principle
-Dependency Inversion Principle
+* Single Responsibility Principle (I will write more about it in this arcticle)
+* Open Closed Principle
+* Liskov Substitution Principle
+* Interface Segregation Principle
+* Dependency Inversion Principle
 
 Single Reponsability Principle - "A class should have only one reason to change"
 
