@@ -7,7 +7,7 @@ categories: software-engineering principles solid
 
 SOLID - Single Responsibility Principle
 
-Well, I aways wanted to write about SOLID, when I read about SOLID at the first time was like I never had trully programmed in my entire life. If you are a programmer and never heard about SOLID, dude, you must read this article.
+Well, I always wanted to write about SOLID, the main reason is because when I read it at the first time was like I never had trully programmed in my entire life, all me previuos code seemed to be a trash and was at this time that I started to study more and, also, started to dedicate more time to improve my skills. The principles stablished by SOLID was so logic that after read about it you may think: "Seriously? How the hell I never thinked about it in this way?" If you are a programmer and never heard about SOLID, dude, you must read this article.
 
 So, at the start, what's SOLID? SOLID represents five basic principles about Object Oriented Programming (OOP), those principles was introducted by Robert C. Martin earlier 2000. If you only follow this principles, your code will be more readable by others programmers and the quality itself will be improved.
 
@@ -21,8 +21,8 @@ The five principles stablished in SOLID are:
 
 Single Reponsability Principle - "A class should have only one reason to change"
 
-The Single Responsibility Principle stablished that a class should have only one reason to change. OK, but why? The main reason is that this class should do only one thing and do it well. Make our classes do only one think (specialize) make our classes more changeable and more stable, because we know exactly how the software will behave if we change it. If we have a class doing more than one thing, those things get coupled, in this way, a change in one of those "functions" can break the other one, also, if the class do two things then we can assume that we may have two teams modifying the same class in same spring!
+The Single Responsibility Principle stablished that a class should have only one reason to change. OK, but why? The main reason is that this class should do only one thing and do it well. Make our classes do only one think (specialize) make our classes more changeable and more stable, because we know exactly how the software will behave if we change it. If we have a class doing more than one thing, those things get coupled, in this way, a change in one of those "functions" can break the other one, also, if the class do two things then we can assume that we may have two teams modifying the same class in same sprint!
 
 The SRP is not only about classes, is applied to methods level too! If you have a method in this method is doing a lot of things (do business, validation, query database at same level, but no restricted only to this), this method is a candidate to refactor. Keeping our code low coupled leverage our work quality to a level where we can be relaxed and change it without surprises (think about that class that is responsible for processing all "generic" operations).
 
-One thing that help us to identify when our code is getting a mess is our test class. If our test class is getting bigger, then, probably, our target class is doing more things that it shoud be doing.
+One thing that help us to identify when our code is getting a mess is our test class. If our test class is getting bigger, then, probably, our target class is doing more things that it shoud be doing, so it may be a good candidate to be refactored.
