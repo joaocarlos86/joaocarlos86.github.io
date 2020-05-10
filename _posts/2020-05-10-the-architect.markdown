@@ -5,9 +5,11 @@ date:   2020-05-10 14:32:44 +0100
 categories: software-engineering architecture
 ---
 
-## What is a software architect?
+## Software Architecture and the Architect
+
 
 # Defining software architecture
+
 * structure of the system (microservices, layered, etc)
 * Architecture characteristics (success criteria, I need to understand this better)
 * Architecture decisions (rules for how the system should be constructed; such as restricting access to the database - introduces the variances)
@@ -63,5 +65,4 @@ almost every decision an architect makes will be challenged
 
 * 2nd: "Why is more important than how"
 
-It's more important to understand why a decision was made the how it was implemented. 
-
+It's more important to understand why a decision was made than how it was implemented. 
