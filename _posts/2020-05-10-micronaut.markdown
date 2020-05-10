@@ -33,7 +33,7 @@ One of the pain points of Spring is that it relies exclusively on runtime reflec
 
 Injecting dependencies at runtime means that, no early verification will be made in order to ensure that all depencies are effectively available. To create an instance of a class with dependencies, the framework needs to identify the ideal candidate and then use reflection to instantiate that class. A natural consequence is if the class being instantiated has more dependencies, those dependencies needs to be created (if not yet) using reflection. If any of the dependencies can't be created or if there's multiple candidates, the application will fail.
 
-Injecting dependencies at compile-time allows the compiler to verify that every component in the application has access to all components it will need.
+Injecting dependencies at compile-time allows the compiler to verify that every component in the application has access to all dependencies it will need. The fact that the compiler is eagerly verifying the dependencies reduces the amount of time needed to create instances of the dependencies and, generally, reduces the usage of reflection. This also reduces the amount of tests that needs to be written.
 
 ## Use cases
 
