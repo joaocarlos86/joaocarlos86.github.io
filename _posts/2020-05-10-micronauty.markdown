@@ -27,7 +27,7 @@ Why polyglot?
 
 Java, Groovy or Kotlin.
 
-{% github_sample_ref joaocarlos86/kafka/blob/master/librdkafka/main.cpp 7 10 %}
+{% github_sample joaocarlos86/kafka/blob/master/librdkafka/main.cpp 7 10 %}
 
 # Inversion of Control
 
