@@ -5,9 +5,9 @@ date:   2020-05-10 14:32:44 +0100
 categories: microservice micronaut
 ---
 
-## Micronaut
+### Micronaut
 
-# What is Micronaut?
+## What is Micronaut?
 
 "A modern, JVM-based, full-stack framework for building modular, easily testable microservice and serverless applications."
 
@@ -15,19 +15,17 @@ That's the Micronaut definition according to [Official Micronaut Website](https:
 
 My definition of Micronaut is a reactive and non-blocking, lightweight and polyglot framework used to build microservices.
 
-Why reactive and non-blocking?
+# Why reactive and non-blocking?
 
 Micronaut supports any framework that implements Reactive Streams (such as [RxJava](https://github.com/ReactiveX/RxJava) and [Reactor](https://projectreactor.io))
 
-Why lightweight?
+# Why lightweight?
 
 Reflection-based IoC frameworks load and cache reflection data for every single field, method, and constructor in your code. Micronaut features a Dependency Injection and Aspect-Oriented Programming runtime that uses no reflection.
 
-Why polyglot?
+# Why polyglot?
 
 Java, Groovy or Kotlin.
-
-{% github_sample joaocarlos86/kafka/blob/master/librdkafka/main.cpp 7 10 %}
 
 # Inversion of Control
 
@@ -39,18 +37,18 @@ Injecting dependencies at compile-time allows the compiler to verify that every 
 
 Injecting dependencies at runtime means that, to create an instance of class with dependencies, reflection will be used. A natural consequence is if the class being instantiated has more dependencies, those dependencies needs to be created (if not yet) using reflection. If any of the dependencies can't be created or if there's multiple candidates, the application will fail.
 
-# Use cases
+## Use cases
 
 Micronaut has a very extensive range of use case, the two most important for me are
 
-* Microservices
+# Microservices
 
 When I wanted to write microservices in Java, I would use Spring Boot with no hesitation, but the truth is you can't really create microservices with Spring, they just aren't micro, the total of dependencies, and the ways of working of the framework are prohibitives. The Micronaut underlying mechanisms (such as the reactive and non-blocking IO and the compile time IC) make of it a good choice if you want something fast that consumes a small amount of resources if compared with the concurrency.
 
-* GraalVM - [docs](https://docs.micronaut.io/latest/guide/index.html#graal)
+# GraalVM - [docs](https://docs.micronaut.io/latest/guide/index.html#graal)
 
 [GraalVM](https://www.graalvm.org/) is a new universal virtual machine from Oracle that supports a polyglot runtime environment and the ability to compile Java applications down to native machine code.
 
-* Serverless
+# Serverless functions
 
 Micronaut is lightweight, and it's low overhead compile-time DI and AOP makes this framework a good choice if you need to write funcions for serverless environemnts.
