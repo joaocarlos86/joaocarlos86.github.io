@@ -5,8 +5,6 @@ date:   2020-05-10 14:32:44 +0100
 categories: microservice micronaut
 ---
 
-### Micronaut
-
 ## What is Micronaut?
 
 "A modern, JVM-based, full-stack framework for building modular, easily testable microservice and serverless applications."
@@ -33,9 +31,9 @@ For me, this is one of the biggest advantages of Micronaut. I make an extensive 
 
 One of the pain points of Spring is that it relies exclusively on runtime reflection and proxies to implement dependency injection. Micronaut, on the other hand, focus on compile time data.
 
-Injecting dependencies at compile-time allows the compiler to verify that every component in the application has access to all components it will need.
+Injecting dependencies at runtime means that, no early verification will be made in order to ensure that all depencies are effectively available. To create an instance of a class with dependencies, the framework needs to identify the ideal candidate and then use reflection to instantiate that class. A natural consequence is if the class being instantiated has more dependencies, those dependencies needs to be created (if not yet) using reflection. If any of the dependencies can't be created or if there's multiple candidates, the application will fail.
 
-Injecting dependencies at runtime means that, to create an instance of class with dependencies, reflection will be used. A natural consequence is if the class being instantiated has more dependencies, those dependencies needs to be created (if not yet) using reflection. If any of the dependencies can't be created or if there's multiple candidates, the application will fail.
+Injecting dependencies at compile-time allows the compiler to verify that every component in the application has access to all components it will need.
 
 ## Use cases
 
