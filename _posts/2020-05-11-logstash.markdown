@@ -1,0 +1,142 @@
+---
+layout: post
+title:  "Logstash - the basics"
+date:   2020-05-11 14:32:44 +0100
+categories: database elasticsearch polyglot-persistence
+---
+
+## What is [Logstash](https://www.elastic.co/products/logstash)?
+
+Logstash is a lightweight, [open-source](https://github.com/elastic/logstash), server-side data processing pipeline that allows you to collect data from a variety of sources, transform it on the fly, and send it to your desired destination. It is often used as a data pipeline for Elasticsearch, an open-source analytics and search engine. [AWS](https://aws.amazon.com/elasticsearch-service/the-elk-stack/logstash/)
+
+Logstash is part of the Elastic Stack along with Beats, Elasticsearch and Kibana.
+
+Logstash provides a multitude of [plugins](https://github.com/elastic/logstash) that allow the user to easily decode/encode data, such as
+
+* [logstash-integration-kafka](https://github.com/logstash-plugins/logstash-integration-kafka)
+* [logstash-integration-jdbc](https://github.com/logstash-plugins/logstash-integration-jdbc)
+* [logstash-codec-csv](https://github.com/logstash-plugins/logstash-codec-csv)
+
+## How to get started with Logstash?
+
+Assuming you already have a up-and-running elastic stack, you already have Logstash. The most basic use-case for Logstash is to copy data from a source and ingest into an Elasticsearch instance.
+
+To copy the data you need to create a file following a syntax similar to JSON in order to define the data pipeline, an exaple is the following:
+
+{% highlight javascript %}
+input {
+    file {
+        start_position => "beginning"
+        path => "/my-data-source.csv"
+    }
+}
+
+filter {
+    csv {
+        columns => ["id","name","address","rank"]
+        convert => {
+            "id" => "integer"
+            "rank" => "integer"
+        }
+    }
+}
+
+output {
+    elasticsearch {
+        hosts => ["localhost:9200"]
+        index => ["my-index-name"]
+    }
+    stdout {
+        codec => "dots"
+    }
+}
+{% endhighlight %}
+
+The 3 sections we have defined in that file are input, filter and output.
+
+### [input](https://www.elastic.co/guide/en/logstash/7.6/input-plugins.html)
+
+input defines the data source, the most commonly-used inpus are
+1. [file](https://www.elastic.co/guide/en/logstash/7.6/plugins-inputs-file.html) - reads a file from the filesystem
+2. [syslog](https://www.elastic.co/guide/en/logstash/7.6/plugins-inputs-syslog.html) - listens on the port 514 for syslog messages and parses according to the [RFC3164](https://tools.ietf.org/html/rfc3164)
+3. [redis](https://www.elastic.co/guide/en/logstash/7.6/plugins-inputs-redis.html) - reads data from a redis server
+4. [beats](https://www.elastic.co/guide/en/logstash/7.6/plugins-inputs-beats.html) - processes events sent by beats
+
+In the example above, we're using the file input plugin to read data from a CSV file:
+
+{% highlight javascript %}
+input {
+    file {
+        start_position => "beginning" // can be beginning or end
+        path => "/my-data-source.csv" // path of the file you want to read
+    }
+}
+{% endhighlight %}
+
+### [filter](https://www.elastic.co/guide/en/logstash/7.6/filter-plugins.html)
+
+Filters are intermediary processing devices in the pipeline. Filters can be combined with conditionals to perform an action on an event if it meets certain criteria.
+
+Some filters are:
+
+1. [grok](https://www.elastic.co/guide/en/logstash/7.6/plugins-filters-grok.html) - parse and structure arbitrary text
+2. [mutate](https://www.elastic.co/guide/en/logstash/7.6/plugins-filters-mutate.html) - perform general transformation on fields
+3. [drop](https://www.elastic.co/guide/en/logstash/7.6/plugins-filters-drop.html) - drop an event
+4. [clone](https://www.elastic.co/guide/en/logstash/7.6/plugins-filters-clone.html) - make a copy of an event
+5. [geopip](https://www.elastic.co/guide/en/logstash/7.6/plugins-filters-geoip.html) - add information about geographical location of IP addresses
+
+In the example above, I'm using the filter plugin CSV to specify the columns that I want to read and I'm also peforming a transformation in two fields (id and rank) to map them to integers.
+
+{% highlight javascript %}
+filter {
+    csv {
+        columns => ["id","name","address","rank"]
+        convert => {
+            "id" => "integer"
+            "rank" => "integer"
+        }
+    }
+}
+{% endhighlight %}
+
+### [output](https://www.elastic.co/guide/en/logstash/7.6/output-plugins.html)
+
+Outputs are the final phase of the pipeline, the user is free to specify multiple outputs.
+
+Some example of output plugins are:
+
+1. [elasticsearch](https://www.elastic.co/guide/en/logstash/7.6/plugins-outputs-elasticsearch.html) - sends the event to Elasticsearch
+2. [file](https://www.elastic.co/guide/en/logstash/7.6/plugins-outputs-file.html) - writes the event to a file
+3. [graphite](https://www.elastic.co/guide/en/logstash/7.6/plugins-outputs-graphite.html) - sends the event to graphite
+4. [statsd](https://www.elastic.co/guide/en/logstash/7.6/plugins-outputs-statsd.html) - send event data to statsd
+
+In the example above, I'm using the output plugin elasticsearch to ingest the data read from the CSV into an elasticsearch instance
+
+{% highlight javascript %}
+output {
+    elasticsearch {
+        hosts => ["localhost:9200"]
+        index => ["my-index-name"]
+    }
+    stdout {
+        codec => "dots" // each event will generate a "." in the console, useful to follow the progress
+    }
+}
+{% endhighlight %}
+
+To run the data pipeline: `logstash -f my_pipeline.conf`
+
+### How to get an ELK stack running locally?
+
+The easiest way is to use [this](https://elk-docker.readthedocs.io) docker image:
+
+{% highlight bash %}
+docker run -p 5601:5601 -p 9200:9200  -p 5044:5044 \
+    -v elk-data:/var/lib/elasticsearch --name elk sebp/elk
+{% endhighlight %}
+
+The container exposes three ports:
+
+* 5601 (Kibana web interface).
+* 9200 (Elasticsearch JSON interface).
+* 5044 (Logstash Beats interface
